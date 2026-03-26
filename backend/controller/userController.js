@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { verifyEmail } from "../emailVerify/verifyEmail.js";
 import { Session } from "../models/sessionModel.js";
 import { sendOTPMail } from "../emailVerify/sendOTPMail.js";
+import cloudinary from "../utils/cloudinary.js";
 
 export const register = async (req, res) => {
   try {
@@ -243,8 +244,7 @@ export const forgotPassword = async (req, res) => {
 
 export const verifyOTP = async (req, res) => {
   try {
-    const { otp } = req.body;
-    const email = req.params.email;
+    const { email, otp } = req.body;
     if (!otp) {
       return res.status(400).json({
         success: false,
@@ -293,33 +293,27 @@ export const verifyOTP = async (req, res) => {
 
 export const changePassword = async (req, res) => {
   try {
-    const { newPassword, confirmPassword } = req.body;
-    const { email } = req.params;
+
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required",
+      });
+    }
 
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
         message: "User not found",
       });
     }
 
-    if (!newPassword || !confirmPassword) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
-    }
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    if (newPassword !== confirmPassword) {
-      return res.status(400).json({
-        success: false,
-        message: "Passwords do not match",
-      });
-    }
-
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
 
     await user.save();
@@ -328,11 +322,16 @@ export const changePassword = async (req, res) => {
       success: true,
       message: "Password changed successfully",
     });
+
   } catch (error) {
+
+    console.log("Change Password Error:", error); // important for debugging
+
     return res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Server error",
     });
+
   }
 };
 
@@ -377,6 +376,9 @@ export const getUserById = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+    console.log("USER:", req.user);
     const userIdToUpdate = req.params.id; // the ID of the user we want to update
     const loggedInUser = req.user; // from isAuthenticated middleware
 
