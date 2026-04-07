@@ -30,7 +30,7 @@ const Navbar = () => {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-        }
+        },
       );
 
       if (res.data.success) {
@@ -50,9 +50,8 @@ const Navbar = () => {
   console.log(cart);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 bg-white/80 backdrop-blur-md rounded-b-2xl">
-        
+    <header className="fixed top-0 left-0 w-full z-50 bg-white backdrop-blur-md">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 bg-white backdrop-blur-md rounded-b-2xl">
         {/* Logo */}
         <div className="flex items-center gap-2 font-semibold text-lg">
           <img
@@ -65,40 +64,104 @@ const Navbar = () => {
 
         {/* Menu */}
         <nav className="hidden md:flex items-center gap-8 text-sm text-gray-700">
-          <ul className="flex gap-7 item-center text-l">
+          <ul className="flex gap-7 items-center text-lg">
             <Link to={"/"}>
-              <li>Home</li>
+              <li
+                className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+    after:content-[''] after:absolute after:left-0 after:-bottom-1 
+    after:w-0 after:h-[2px] after:bg-blue-600 
+    after:transition-all after:duration-300 hover:after:w-full 
+    hover:drop-shadow-md"
+              >
+                Home
+              </li>
             </Link>
 
             <Link to={"/product"}>
-              <li>Product</li>
+              <li
+                className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+    after:content-[''] after:absolute after:left-0 after:-bottom-1 
+    after:w-0 after:h-[2px] after:bg-blue-600 
+    after:transition-all after:duration-300 hover:after:w-full 
+    hover:drop-shadow-md"
+              >
+                Product
+              </li>
             </Link>
 
             <Link to={"/service"}>
-              <li>Service</li>
+              <li
+                className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+    after:content-[''] after:absolute after:left-0 after:-bottom-1 
+    after:w-0 after:h-[2px] after:bg-blue-600 
+    after:transition-all after:duration-300 hover:after:w-full 
+    hover:drop-shadow-md"
+              >
+                Service
+              </li>
             </Link>
 
             <Link to={"/project"}>
-              <li>Project</li>
+              <li
+                className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+    after:content-[''] after:absolute after:left-0 after:-bottom-1 
+    after:w-0 after:h-[2px] after:bg-blue-600 
+    after:transition-all after:duration-300 hover:after:w-full 
+    hover:drop-shadow-md"
+              >
+                Project
+              </li>
             </Link>
 
             <Link to={"/aboutus"}>
-              <li>About US</li>
+              <li
+                className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+    after:content-[''] after:absolute after:left-0 after:-bottom-1 
+    after:w-0 after:h-[2px] after:bg-blue-600 
+    after:transition-all after:duration-300 hover:after:w-full 
+    hover:drop-shadow-md"
+              >
+                About US
+              </li>
             </Link>
 
             <Link to={"/contactus"}>
-              <li>Contact US</li>
+              <li
+                className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+    after:content-[''] after:absolute after:left-0 after:-bottom-1 
+    after:w-0 after:h-[2px] after:bg-blue-600 
+    after:transition-all after:duration-300 hover:after:w-full 
+    hover:drop-shadow-md"
+              >
+                Contact US
+              </li>
             </Link>
 
             {user && (
               <Link to={`/profile/${user._id}`}>
-                <li>Hello , {user.firstName}</li>
+                <li
+                  className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+      after:content-[''] after:absolute after:left-0 after:-bottom-1 
+      after:w-0 after:h-[2px] after:bg-blue-600 
+      after:transition-all after:duration-300 hover:after:w-full 
+      hover:drop-shadow-md"
+                >
+                  Hello, {user.firstName}
+                </li>
               </Link>
             )}
 
             {admin && (
               <Link to={`/dashboard/sales`}>
-                <li>Dashboard</li>
+                <li
+                  className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+      after:content-[''] after:absolute after:left-0 after:-bottom-1 
+      after:w-0 after:h-[2px] after:bg-blue-600 
+      after:transition-all after:duration-300 hover:after:w-full 
+      hover:drop-shadow-md"
+                >
+                  Dashboard
+                </li>
               </Link>
             )}
           </ul>
@@ -132,7 +195,7 @@ const Navbar = () => {
           ) : (
             <Button
               onClick={() => navigate("/login")}
-              className="bg-gradient-to-r from-blue-500 to-purple-500 text-white cursor-pointer"
+              className="bg-gradient from-blue-500 to-purple-500 text-white cursor-pointer"
             >
               Login
             </Button>
