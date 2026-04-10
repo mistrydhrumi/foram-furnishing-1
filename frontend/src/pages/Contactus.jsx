@@ -27,7 +27,12 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    await axios.post("http://localhost:8000/api/contact", formData);
+    const res = await axios.post(
+      "http://localhost:8000/api/v1/contact",
+      formData   // ✅ correct variable
+    );
+
+    console.log(res.data); // optional debug
     alert("Message sent successfully ✅");
 
     setFormData({
@@ -41,7 +46,7 @@ const handleSubmit = async (e) => {
       message: "",
     });
   } catch (error) {
-    console.log(error);
+    console.log(error.response?.data || error.message);
     alert("Something went wrong ❌");
   }
 };
