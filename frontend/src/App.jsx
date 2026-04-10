@@ -31,6 +31,7 @@ import VerifyOtp from './pages/VerifyOtp'
 import ForgotPassword from './pages/ForgotPassword'
 import Profile from './pages/Profile'
 import RootLayout from "./components/RootLayout";
+import AdminContact from './pages/admin/AdminContact'
 
 // const router = createBrowserRouter([
 //   {
@@ -263,6 +264,7 @@ const router = createBrowserRouter([
           { path:"users/orders/:userId", element: <ShowUserOrders/> },
           { path:"users", element: <AdminUsers/> },
           { path:"users/:id", element: <UserInfo/> },
+          { path:"contact", element: <AdminContact/> },
         ]
       }
     ]
