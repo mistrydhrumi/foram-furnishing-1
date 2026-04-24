@@ -41,6 +41,25 @@ import ForgotPassword from './pages/ForgotPassword'
 import Profile from './pages/Profile'
 import RootLayout from "./components/RootLayout";
 import AdminContact from './pages/admin/AdminContact'
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { ArrowRight, Bot, MessageSquare, Minimize2, X } from 'lucide-react';
+import { getGeminiResponse } from './services/geminiService';
+const QUICK_ACTIONS = [
+  'Suggest a living room palette',
+  'Ideas for a small bedroom',
+  'Modern kitchen materials',
+  'Help style a cozy corner',
+];
+
+const INITIAL_MESSAGES = [
+  {
+    id: 'welcome',
+    role: 'assistant',
+    text:
+      'Hi, I am Studio Assistant. I can help with color palettes, furniture styling, room layout ideas, material choices, and interior inspiration.',
+  },
+];
 
 const router = createBrowserRouter([
   {
@@ -179,9 +198,182 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [messages, setMessages] = useState(INITIAL_MESSAGES);
+
+  const unreadCount = useMemo(() => (isOpen ? 0 : 1), [isOpen]);
+
+  const sendMessage = async (rawText) => {
+    const text = rawText.trim();
+    if (!text || isSending) return;
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `user-${Date.now()}`,
+        role: 'user',
+        text,
+      },
+    ]);
+    setInput('');
+    setIsSending(true);
+
+    const responseText = await getGeminiResponse(text);
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `assistant-${Date.now() + 1}`,
+        role: 'assistant',
+        text: responseText,
+      },
+    ]);
+    setIsSending(false);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await sendMessage(input);
+  };
+
+  const handleComposerKeyDown = async (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      await sendMessage(input);
+    }
+  };
   return (
     <>
     <RouterProvider router={router}/>
+    <main className="min-h-screen">
+
+      <div className="chat-widget">
+        <AnimatePresence>
+          {isOpen && (
+            <motion.section
+              initial={{ opacity: 0, y: 24, scale: 0.94 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 18, scale: 0.96 }}
+              transition={{ duration: 0.24, ease: 'easeOut' }}
+              className="chat-window"
+            >
+              <div className="chat-window__header">
+                <div className="flex items-center gap-3">
+                  <div className="chat-window__avatar">
+                    <Bot className="h-5 w-5" />
+                  </div>
+
+                  <div>
+                    <p className="text-sm font-semibold text-stone-900">Studio Assistant</p>
+                    <p className="text-xs text-stone-500">Interior styling guide</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    aria-label="Minimize chat"
+                    className="icon-button"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Minimize2 className="h-4 w-4" />
+                  </button>
+
+                  <button
+                    type="button"
+                    aria-label="Close chat"
+                    className="icon-button"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="chat-window__intro">
+                <p className="text-xs uppercase tracking-[0.28em] text-amber-700">Design prompts</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {QUICK_ACTIONS.map((action) => (
+                    <button
+                      key={action}
+                      type="button"
+                      className="quick-action"
+                      onClick={() => void sendMessage(action)}
+                    >
+                      {action}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="chat-window__messages">
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={message.role === 'user' ? 'message-row user' : 'message-row assistant'}
+                  >
+                    <div className={message.role === 'user' ? 'message-bubble user' : 'message-bubble assistant'}>
+                      {message.text}
+                    </div>
+                  </div>
+                ))}
+
+                {isSending && (
+                  <div className="message-row assistant">
+                    <div className="message-bubble assistant">
+                      <span className="typing-dot" />
+                      <span className="typing-dot" />
+                      <span className="typing-dot" />
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <form className="chat-window__composer" onSubmit={handleSubmit}>
+                <label className="sr-only" htmlFor="chat-input">
+                  Type your message
+                </label>
+
+                <textarea
+                  id="chat-input"
+                  rows={1}
+                  value={input}
+                  placeholder="Ask anything"
+                  className="chat-input"
+                  onChange={(event) => setInput(event.target.value)}
+                  onKeyDown={(event) => void handleComposerKeyDown(event)}
+                />
+
+                <button type="submit" className="send-button" disabled={!input.trim() || isSending}>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
+            </motion.section>
+          )}
+        </AnimatePresence>
+
+        <motion.button
+          type="button"
+          className="launcher-button"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          <span className="launcher-button__pulse" />
+          <span className="launcher-button__icon">
+            <MessageSquare className="h-5 w-5" />
+          </span>
+          <span className="launcher-button__text">
+            {/* Ask our design assistant */}
+            {/* <small>Ideas for every room</small> */}
+          </span>
+          {/* {unreadCount > 0 && <span className="launcher-button__badge">{unreadCount}</span>} */}
+        </motion.button>
+      </div>
+    </main>
     </>
   )
 }
