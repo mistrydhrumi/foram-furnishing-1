@@ -138,20 +138,7 @@ const Navbar = () => {
               </li>
             </Link>
 
-            {user && (
-              <Link to={`/profile/${user._id}`}>
-                <li
-                  className="relative cursor-pointer hover:text-blue-600 transition duration-300 
-      after:content-[''] after:absolute after:left-0 after:-bottom-1 
-      after:w-0 after:h-[2px] after:bg-blue-600 
-      after:transition-all after:duration-300 hover:after:w-full 
-      hover:drop-shadow-md"
-                >
-                  Hello, {user.firstName}
-                </li>
-              </Link>
-            )}
-
+            
             {admin && (
               <Link to={`/dashboard/sales`}>
                 <li
@@ -185,6 +172,20 @@ const Navbar = () => {
                 0}
             </span>
           </Link>
+          {user && (
+            <Link to={`/profile/${user._id}`}>
+              <div
+                className="relative cursor-pointer hover:text-blue-600 transition duration-300 
+      after:content-[''] after:absolute after:left-0 after:-bottom-1 
+      after:w-0 after:h-[2px] after:bg-blue-600 
+      after:transition-all after:duration-300 hover:after:w-full 
+      hover:drop-shadow-md"
+              >
+                Hello {user.firstName}
+              </div>
+            </Link>
+          )}
+
 
           {user ? (
             <Button
@@ -223,6 +224,7 @@ const Navbar = () => {
                 0}
             </span>
           </Link>
+          
 
           {/* Hamburger Menu Button */}
           <button
@@ -264,7 +266,7 @@ const Navbar = () => {
 
             {user && (
               <Link to={`/profile/${user._id}`} onClick={() => setMobileMenuOpen(false)}>
-                <li className="cursor-pointer hover:text-blue-600">Hello, {user.firstName}</li>
+                <li className="cursor-pointer hover:text-blue-600">Hello {user.firstName}</li>
               </Link>
             )}
 

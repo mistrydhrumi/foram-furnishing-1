@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import project1 from "../assets/project1.jpeg";
+import project2 from "../assets/project2.jpeg";
 import item1 from "../assets/item1.jpeg";
 import item2 from "../assets/item2.jpeg";
 import item3 from "../assets/item3.jpeg";
+import item4 from "../assets/item4.jpeg";
 import p1 from "../assets/p1.jpg";
 
 // BHK Images
@@ -22,53 +25,51 @@ const bhk4Images = Object.values(
 );
 
 // Before/After Images
-const beforeImages = Object.values(
+const beforeAfter1 = Object.values(
   import.meta.glob('../assets/Before1/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
 );
 
-const afterImages = [
-  ...Object.values(
-    import.meta.glob('../assets/beforeafter2/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
-  ),
-  ...Object.values(
-    import.meta.glob('../assets/beforeafter3/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
-  ),
-  ...Object.values(
-    import.meta.glob('../assets/beforeafter4/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
-  ),
-];
+const beforeAfter2 = Object.values(
+  import.meta.glob('../assets/beforeafter2/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
+);
+
+const beforeAfter3 = Object.values(
+  import.meta.glob('../assets/beforeafter3/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
+);
+
+const beforeAfter4 = Object.values(
+  import.meta.glob('../assets/beforeafter4/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
+);
 
 const Project = () => {
-  const [showAfter, setShowAfter] = useState(false);
-
-  const twoBhkImages = [...bhk2Images, ...bhk2_2Images];
-  const threeBhkImages = bhk3Images;
-  const fourBhkImages = bhk4Images;
-
-  const bhkSections = [
+  const bhkData = [
     {
       type: '2BHK',
-      title: '2 Bedroom Living Experience',
-      description:
-        'Smart layouts, seamless storage and elegant finishes for modern 2BHK homes. Every corner is designed to feel spacious while maximizing functionality.',
-      highlights: ['Custom wardrobes', 'Open-plan living', 'Premium kitchen finishes'],
-      images: twoBhkImages,
+      title: '2 Bedroom Apartment',
+      description: 'Compact and efficient living spaces designed for modern urban dwellers.',
+      images: bhk2Images,
+      beforeAfter: beforeAfter1,
+    },
+    {
+      type: '2BHK2',
+      title: '2 Bedroom Premium',
+      description: 'Enhanced 2BHK layouts with premium finishes and optimized space utilization.',
+      images: bhk2_2Images,
+      beforeAfter: beforeAfter2,
     },
     {
       type: '3BHK',
-      title: '3 Bedroom Family Home',
-      description:
-        'Balanced living spaces for family comfort with ample room for conversation, rest and entertainment. Our designs focus on flow, light and long-lasting materials.',
-      highlights: ['Spacious master suites', 'Optimized circulation', 'Warm interior palette'],
-      images: threeBhkImages,
+      title: '3 Bedroom Apartment',
+      description: 'Spacious family homes with balanced room distribution and comfort.',
+      images: bhk3Images,
+      beforeAfter: beforeAfter3,
     },
     {
       type: '4BHK',
-      title: '4 Bedroom Luxury Residence',
-      description:
-        'Expansive luxury homes with premium finishes, multiple living areas and sophisticated design elements. Perfect for families seeking the ultimate in comfort and style.',
-      highlights: ['Luxury master suites', 'Multiple living zones', 'Premium materials'],
-      images: fourBhkImages,
+      title: '4 Bedroom Villa',
+      description: 'Luxurious multi-bedroom residences with expansive living areas.',
+      images: bhk4Images,
+      beforeAfter: beforeAfter4,
     },
   ];
 
@@ -114,84 +115,52 @@ const Project = () => {
         </div>
 
         {/* BHK Sections */}
-        {bhkSections.map((section) => (
-          <div key={section.type} className="mb-20">
+        {bhkData.map((bhk, index) => (
+          <div key={bhk.type} className="mb-20">
             <div className="text-center mb-12">
               <p className="text-blue-600 text-sm font-semibold tracking-wider uppercase mb-2">
-                {section.type} Projects
+                {bhk.type} Projects
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                {section.title}
+                {bhk.title}
               </h2>
-              <p className="text-slate-600 max-w-2xl mx-auto mb-6">
-                {section.description}
+              <p className="text-slate-600 max-w-2xl mx-auto">
+                {bhk.description}
               </p>
-              <div className="inline-flex flex-wrap justify-center gap-3">
-                {section.highlights.map((highlight, idx) => (
-                  <span key={idx} className="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-xs font-medium">
-                    {highlight}
-                  </span>
-                ))}
-              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {section.images.map((image, imgIndex) => (
-                <div key={imgIndex} className="overflow-hidden rounded-3xl shadow-sm hover:shadow-xl transition duration-300">
+            {/* Project Gallery */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {bhk.images.slice(0, 6).map((image, imgIndex) => (
+                <div key={imgIndex} className="overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition duration-300">
                   <img
                     src={image}
-                    alt={`${section.type} project ${imgIndex + 1}`}
-                    className="w-full h-72 object-cover hover:scale-105 transition duration-500"
+                    alt={`${bhk.type} project ${imgIndex + 1}`}
+                    className="w-full h-64 object-cover hover:scale-105 transition duration-500"
                   />
                 </div>
               ))}
             </div>
+
+            {/* Before & After Section */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm">
+              <h3 className="text-2xl font-semibold text-slate-900 mb-6 text-center">
+                Before & After Transformation
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {bhk.beforeAfter.slice(0, 4).map((image, imgIndex) => (
+                  <div key={imgIndex} className="overflow-hidden rounded-2xl shadow-sm">
+                    <img
+                      src={image}
+                      alt={`${bhk.type} before/after ${imgIndex + 1}`}
+                      className="w-full h-48 object-cover hover:scale-105 transition duration-500"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         ))}
-
-        {/* Before / After Section */}
-        <div className="mb-20 bg-white rounded-3xl p-8 shadow-sm">
-          <div className="text-center mb-8">
-            <p className="text-blue-600 text-sm font-semibold tracking-wider uppercase mb-2">Before & After</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">See the Transformation</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
-              Compare the original interiors with the finished project styling. Click the buttons to switch between before and after views and explore the full transformation story.
-            </p>
-          </div>
-
-          <div className="flex justify-center gap-4 mb-6">
-            <button
-              onClick={() => setShowAfter(false)}
-              className={`rounded-full border px-6 py-3 text-sm font-semibold transition ${showAfter ? 'border-slate-300 text-slate-600 bg-white' : 'border-blue-600 bg-blue-600 text-white'}`}
-            >
-              Before
-            </button>
-            <button
-              onClick={() => setShowAfter(true)}
-              className={`rounded-full border px-6 py-3 text-sm font-semibold transition ${showAfter ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 bg-white text-slate-600'}`}
-            >
-              After
-            </button>
-          </div>
-
-          <p className="text-center text-slate-500 mb-10">
-            {showAfter
-              ? 'After images show the completed styling, refined finishes and the final mood of the space.'
-              : 'Before images show the starting condition, which our team transforms with careful planning and premium execution.'}
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {(showAfter ? afterImages : beforeImages).map((image, imgIndex) => (
-              <div key={imgIndex} className="overflow-hidden rounded-3xl shadow-sm">
-                <img
-                  src={image}
-                  alt={`${showAfter ? 'after' : 'before'} project ${imgIndex + 1}`}
-                  className="w-full h-72 object-cover hover:scale-105 transition duration-500"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Testimonials Section */}
         <div className="bg-white rounded-3xl p-12 shadow-sm">
