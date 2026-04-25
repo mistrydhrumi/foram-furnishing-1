@@ -39,6 +39,7 @@ import ChangePassword from './pages/ChangePassword'
 import VerifyOtp from './pages/VerifyOtp'
 import ForgotPassword from './pages/ForgotPassword'
 import Profile from './pages/Profile'
+import StyleGallery from './pages/StyleGallery'
 import RootLayout from "./components/RootLayout";
 import AdminContact from './pages/admin/AdminContact'
 import { useMemo, useState } from 'react';
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
       {
         path:'product/:id',
         element:<><Navbar/><SingleProduct/></>
+      },
+      {
+        path:'style/:style',
+        element:<><Navbar/><StyleGallery/><Footer/></>
       },
       {
         path:'cart',
