@@ -145,8 +145,9 @@ const BedLinenCollection = () => {
               <button className="bg-white text-rose-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 Shop Collection
               </button>
-              <Link to="/contactus" className="bg-rose-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-rose-700 transition inline-block">
-                Style Guide
+              <Link to="/consultation" className="bg-rose-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-rose-700 transition inline-block">
+                Schedule Design Consultation
+
               </Link>
             </div>
           </div>

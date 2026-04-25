@@ -137,8 +137,9 @@ const CurtainDesigning = () => {
               <button className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 View Fabrics
               </button>
-              <Link to="/contactus" className="bg-purple-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition inline-block">
+              <Link to="/consultation" className="bg-purple-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition inline-block">
                 Schedule Design Consultation
+
               </Link>
             </div>
           </div>

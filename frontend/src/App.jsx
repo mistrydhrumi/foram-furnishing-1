@@ -10,6 +10,7 @@ import Wishlist from './pages/Wishlist'
 import Footer from './components/ui/Footer'
 import Aboutus from './pages/Aboutus'
 import Contactus from './pages/Contactus'
+import Consultation from './pages/Consultation'
 import Product from './pages/Products'
 import Project from './pages/Project'
 import Service from './pages/Service'
@@ -182,6 +183,10 @@ const router = createBrowserRouter([
       {
         path:'contactus',
         element:<><Navbar/><Contactus/><Footer/></>
+      },
+      {
+        path:'consultation',
+        element:<><Navbar/><Consultation/><Footer/></>
       },
       {
         path:'dashboard',

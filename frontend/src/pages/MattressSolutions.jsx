@@ -146,8 +146,9 @@ const MattressSolutions = () => {
               <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 View Collection
               </button>
-              <Link to="/contactus" className="bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition inline-block">
-                Schedule Consultation
+              <Link to="/consultation" className="bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition inline-block">
+    Schedule Design Consultation
+
               </Link>
             </div>
           </div>

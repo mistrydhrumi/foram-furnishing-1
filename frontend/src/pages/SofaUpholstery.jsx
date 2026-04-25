@@ -145,8 +145,9 @@ const SofaUpholstery = () => {
               <button className="bg-white text-pink-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 View Fabrics
               </button>
-              <Link to="/contactus" className="bg-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-pink-700 transition inline-block">
-                Request Free Quote
+              <Link to="/consultation" className="bg-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-pink-700 transition inline-block">
+                Schedule Design Consultation
+
               </Link>
             </div>
           </div>

@@ -137,8 +137,9 @@ const WallpaperServices = () => {
               <button className="bg-white text-amber-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 View Designs
               </button>
-              <Link to="/contactus" className="bg-amber-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition inline-block">
-                Schedule Installation
+              <Link to="/consultation" className="bg-amber-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition inline-block">
+                Schedule Design Consultation
+
               </Link>
             </div>
           </div>

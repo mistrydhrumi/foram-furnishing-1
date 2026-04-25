@@ -145,8 +145,9 @@ const BlindsSolutions = () => {
               <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 Explore Collection
               </button>
-              <Link to="/contactus" className="bg-indigo-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition inline-block">
-                Get Free Consultation
+              <Link to="/consultation" className="bg-indigo-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition inline-block">
+                Schedule Design Consultation
+
               </Link>
             </div>
           </div>

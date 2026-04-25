@@ -137,8 +137,9 @@ const ProfileShutters = () => {
               <button className="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 View Styles
               </button>
-              <Link to="/contactus" className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-700 transition inline-block">
-                Schedule Consultation
+              <Link to="/consultation" className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-700 transition inline-block">
+               Schedule Design Consultation
+
               </Link>
             </div>
           </div>

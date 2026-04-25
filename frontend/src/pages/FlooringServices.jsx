@@ -145,8 +145,9 @@ const FlooringServices = () => {
               <button className="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 View Options
               </button>
-              <Link to="/contactus" className="bg-teal-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition inline-block">
-                Get Free Quote
+              <Link to="/consultation" className="bg-teal-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition inline-block">
+                Schedule Design Consultation
+
               </Link>
             </div>
           </div>

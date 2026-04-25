@@ -137,8 +137,8 @@ const StretchCeiling = () => {
               <button className="bg-white text-cyan-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 View Gallery
               </button>
-              <Link to="/contactus" className="bg-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-700 transition inline-block">
-                Request Design Consultation
+              <Link to="/consultation" className="bg-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-700 transition inline-block">
+                Schedule Design Consultation
               </Link>
             </div>
           </div>

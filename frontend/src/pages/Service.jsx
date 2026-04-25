@@ -538,7 +538,21 @@ const Service = () => {
               partners@foram.com
             </a>
           </div>
+        </div>
 
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <a
+            href="#catalog"
+            className="inline-flex items-center justify-center rounded-full border border-blue-600 px-8 py-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-50"
+          >
+            View Catalog
+          </a>
+          <Link
+            to="/consultation"
+            className="inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+          >
+            Book Consultation
+          </Link>
         </div>
 
       </div>
