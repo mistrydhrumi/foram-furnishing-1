@@ -8,7 +8,15 @@ import axios from "axios";
 const OrderCard = ({ userOrder = [], downloadInvoice }) => {
   const navigate = useNavigate();
 
-  const handleCancelRequest = async (id) => {
+  const handleCancelRequest = async (id, orderStatus) => {
+    // Check if order is in a status where cancellation is not allowed
+    if (orderStatus === "Out for Delivery" || orderStatus === "Delivered") {
+      alert(
+        "Your order is out of delivery and delivered, so you cannot cancel the order. Thank you"
+      );
+      return;
+    }
+
     try {
       const accessToken = localStorage.getItem("accessToken");
       const res = await axios.post(
@@ -128,14 +136,27 @@ const OrderCard = ({ userOrder = [], downloadInvoice }) => {
 
                   {/* ✅ CANCEL BUTTON FOR BOTH COD + RAZORPAY */}
                   {!order.cancelRequest &&
-                    order.orderStatus !== "Cancelled" && (
+                    order.orderStatus !== "Cancelled" &&
+                    order.orderStatus !== "Out for Delivery" &&
+                    order.orderStatus !== "Delivered" && (
                       <Button
                         className="bg-red-600 hover:bg-red-700"
-                        onClick={() => handleCancelRequest(order._id)}
+                        onClick={() =>
+                          handleCancelRequest(order._id, order.orderStatus)
+                        }
                       >
                         Cancel Order
                       </Button>
                     )}
+
+                  {/* ✅ MESSAGE FOR OUT OF DELIVERY/DELIVERED */}
+                  {(order.orderStatus === "Out for Delivery" ||
+                    order.orderStatus === "Delivered") && (
+                    <span className="text-gray-600 font-medium">
+                      Cancellation not allowed - Order is{" "}
+                      {order.orderStatus.toLowerCase()}
+                    </span>
+                  )}
 
                   {/* ✅ REQUEST SENT */}
                   {order.cancelRequest && !order.cancelApproved && (

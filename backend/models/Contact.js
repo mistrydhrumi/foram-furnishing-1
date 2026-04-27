@@ -9,6 +9,10 @@ const contactSchema = new mongoose.Schema({
   spaceType: String,
   location: String,
   message: String,
+  followUp: {
+    type: String,
+    default: "",
+  },
   isRead: {
     type: Boolean,
     default: false,

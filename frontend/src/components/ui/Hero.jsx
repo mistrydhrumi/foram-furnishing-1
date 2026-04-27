@@ -84,7 +84,7 @@ const Hero = () => {
                 {/* Button */}
                 <div className="flex gap-4 mt-6">
                   <Link
-                    to="/Contactus"
+                    to="/estimate"
                     className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium"
                   >
                     Click for Enquiry →

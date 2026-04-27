@@ -226,8 +226,11 @@ export const downloadInvoice = async (req, res) => {
     doc.moveDown();
 
     order.products.forEach((item) => {
+      // ✅ Handle null products gracefully
+      const productName = item.productId?.productName || "Product Unavailable";
+      const productPrice = item.productId?.productPrice || 0;
       doc.text(
-        `${item.productId.productName} | Qty: ${item.quantity} | Price: ₹${item.productId.productPrice}`,
+        `${productName} | Qty: ${item.quantity} | Price: ₹${productPrice}`,
       );
     });
 
@@ -485,6 +488,11 @@ export const cancelRequestOrder = async (req, res) => {
       });
     }
 
+    // ✅ Ensure paymentMethod is set (for old orders)
+    if (!order.paymentMethod) {
+      order.paymentMethod = "RAZORPAY"; // Default to RAZORPAY if not set
+    }
+
     order.orderStatus = "Cancel Requested";
     order.cancelRequest = true;
 
@@ -515,6 +523,11 @@ export const approveCancelOrder = async (req, res) => {
         success: false,
         message: "Order not found",
       });
+    }
+
+    // ✅ Ensure paymentMethod is set (for old orders)
+    if (!order.paymentMethod) {
+      order.paymentMethod = "RAZORPAY"; // Default to RAZORPAY if not set
     }
 
     order.orderStatus = "Cancelled";

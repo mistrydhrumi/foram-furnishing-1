@@ -61,6 +61,30 @@ export const markAsRead = async (req, res) => {
   }
 };
 
+// ✅ ADD REMARK
+export const addRemark = async (req, res) => {
+  try {
+    const { followUp } = req.body;
+    const updatedContact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { followUp },
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      message: "Remark added successfully",
+      data: updatedContact,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Error adding remark",
+    });
+  }
+};
+
 // ✅ DELETE CONTACT
 export const deleteContact = async (req, res) => {
   try {

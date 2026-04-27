@@ -1,11 +1,11 @@
-import { LayoutDashboard, Package, PackagePlus, PackageSearch, Users ,Form } from 'lucide-react'
+import { LayoutDashboard, Package, PackagePlus, PackageSearch, Users, Form, MessageSquare } from 'lucide-react'
 import React from 'react'
 import { FaRegEdit } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
 
 const Sidebar = () => {
   return (
-    <div className='hidden fixed md:block border-r bg-blue-50 border-blue-200 x-10 w-[300px] p-10 space-y-2 h-screen'>
+    <div className='hidden fixed md:block border-r bg-blue-50 border-blue-200 x-10 w-72 p-8 space-y-2 h-screen'>
         <div className='text-center pt-10 px-3 space-y-2'>
             <NavLink 
                 to='/dashboard/sales' 
@@ -40,7 +40,7 @@ const Sidebar = () => {
              <NavLink 
                 to='/dashboard/adminconsultation' 
                 className={({isActive}) => `text-xl ${isActive ? "bg-blue-600 text-gray-200" : "bg-transparent"} flex items-center gap-2 font-semi-bold cursor-pointer p-2 rounded-2xl w-full`}>
-                <Form />    <span>Consultation</span>
+                <MessageSquare />    <span>Consultation</span>
             </NavLink>
         </div>
     </div>

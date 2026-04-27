@@ -15,6 +15,10 @@ const consultationSchema = new mongoose.Schema(
 
     size: String,
     budget: String,
+    selectedPlan: {
+      type: String,
+      default: null,
+    },
 
     consultationType: {
       type: String,

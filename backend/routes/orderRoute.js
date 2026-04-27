@@ -12,6 +12,7 @@ import {
   updateOrderStatus,
   downloadInvoice,
   approveCancelOrder,
+  getUserOrders,
 } from "../controller/orderController.js";
 import { isAdmin } from "../middleware/isAuthenticated.js";
 
@@ -28,6 +29,9 @@ router.put("/update-order-status/:id", isAuthenticated, isAdmin, updateOrderStat
 
 // Admin - approve cancel
 router.post("/approve-cancel/:id", isAuthenticated, isAdmin, approveCancelOrder);
+
+// Admin - get specific user orders
+router.get("/user-order/:userId", isAuthenticated, isAdmin, getUserOrders);
 
 // User/Admin - download invoice
 router.get("/invoice/:id", isAuthenticated, downloadInvoice);

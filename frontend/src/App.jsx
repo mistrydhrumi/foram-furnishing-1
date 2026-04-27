@@ -52,6 +52,7 @@ import { getGeminiResponse } from './services/geminiService';
 import AdminConsultation from './pages/admin/AdminConsultation'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Estimate from './pages/Estimate'
 const QUICK_ACTIONS = [
   'Suggest a living room palette',
   'Ideas for a small bedroom',
@@ -192,6 +193,10 @@ const router = createBrowserRouter([
       {
         path:'consultation',
         element:<><Navbar/><Consultation/><Footer/></>
+      },
+      {
+        path:"/estimate" ,
+        element:<Estimate />
       },
       {
         path:'dashboard',
