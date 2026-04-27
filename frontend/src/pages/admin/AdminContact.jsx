@@ -83,12 +83,12 @@ function AdminContact() {
   };
 
   return (
-    <div className="flex-1">
-      <div className="lg:pl-72 pl-6 bg-slate-50 py-12 pr-8 mx-auto px-4 min-h-screen">
+    <div className="flex-1 pl-6 pt-4">
+      <div className="lg:pl-72  bg-slate-50 py-12 pr-8 mx-auto  min-h-screen">
 
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className=" mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900">Contact Messages</h2>
+            <h2 className="pl-5 text-3xl font-semibold tracking-tight text-slate-900">Contact Messages</h2>
             <p className="mt-2 text-sm text-slate-600">
               Review incoming contact inquiries and manage follow-ups.
             </p>
