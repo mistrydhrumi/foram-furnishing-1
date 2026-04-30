@@ -31,7 +31,7 @@ const Aboutus = () => {
       <section className="py-20 bg-gray-100">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Driven by Purpose
+           Owned and Operated by Ananad Jadvani 
           </h2>
 
           <p className="text-gray-500 mb-14">
@@ -152,7 +152,7 @@ const Aboutus = () => {
                 href="/contact"
                 className="bg-white text-blue-700 px-6 py-3 rounded-lg font-medium"
               >
-                <Link to={"/Contactus"}>Book a Consultation</Link>
+                <Link to={"/consultation"}>Book a Consultation</Link>
               </a>
 
               {/* <a
