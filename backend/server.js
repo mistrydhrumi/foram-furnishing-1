@@ -32,7 +32,7 @@ app.use("/api/v1/wishlist", wishlistRoutes);
 app.use("/api/v1/contact", contactRoutes);
 app.use("/api/v1/consultation", consultationRoutes);
 app.use(express.static(path.join(__dirname, "frontend/dist")));
-app.get("/*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
